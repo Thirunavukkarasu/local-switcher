@@ -21,16 +21,36 @@ export default defineManifest(async () => ({
   short_name: 'Localhost Switcher',
   description:
     'Quickly switch between localhost URLs. Add custom URLs for easy access.',
-  permissions: ['activeTab', 'contextMenus', 'tabs', 'identity', 'storage'],
+  permissions: ['activeTab', 'contextMenus', 'tabs', 'identity', 'storage', 'notifications'],
   action: {
     default_title: 'Localhost Switcher',
-    default_popup: 'index.html'
+    default_popup: 'index.html',
+    default_icon: {
+      '16': 'icon16.png',
+      '32': 'icon32.png',
+      '48': 'icon48.png',
+      '128': 'icon128.png',
+    }
+  },
+  externally_connectable: {
+    matches: ['http://localhost:3000/*'],
   },
   background: {
     service_worker: './src/background.ts',
     type: 'module',
   },
-  content_security_policy: {
-    extension_pages: "script-src 'self'; object-src 'self';",
-  }
+  icons: {
+    '16': 'icon16.png',
+    '32': 'icon32.png',
+    '48': 'icon48.png',
+    '128': 'icon128.png'
+  },
+  commands: {
+    "switch-environment": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"  // You can change this to your desired shortcut
+      },
+      "description": "Switch environment"
+    }
+  },
 }));

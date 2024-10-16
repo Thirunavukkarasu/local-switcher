@@ -37,13 +37,13 @@ const App = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-[250px]">
       <h1 className="text-lg font-semibold">Localhost Switcher</h1>
       <div className="mt-4">
         {urls.map((url, index) => (
           <button
             key={index}
-            className="w-full mb-2 bg-blue-500 text-white py-2 px-4 rounded"
+            className="w-full mb-2 text-blue-500 py-2 px-4 rounded"
             onClick={() => switchToUrl(url)}
           >
             {url}
@@ -59,10 +59,15 @@ const App = () => {
         onChange={(e) => setCustomUrl(e.target.value)}
       />
       <button
-        className="bg-green-500 text-white py-2 px-4 mt-2 w-full rounded"
+        className="bg-orange-500 text-white py-2 px-4 mt-2 w-full rounded"
         onClick={addUrl}
       >
         Add URL
+      </button>
+      <button className="bg-green-500 text-white py-2 px-4 mt-2 w-full rounded"
+        onClick={() => chrome.runtime.sendMessage({ command: 'switch-environment  ' })}
+      >
+        Switch Environment
       </button>
     </div>
   );
